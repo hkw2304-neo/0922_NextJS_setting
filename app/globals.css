@@ -1,26 +1,238 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ==========================================================================
+   1. 공통 및 글로벌 레이아웃 (Common & Global Layout)
+   ========================================================================== */
+.container-common {
+  padding: 40px;
+  max-width: 400px;
+  margin: 0 auto;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+.label-common {
+  display: block;
+  margin-bottom: 4px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+.input-common {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+.button-common {
+  padding: 10px;
+  background-color: #0070f3;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.form-common {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+/* ==========================================================================
+   2. 헤더 스타일 (Header)
+   ========================================================================== */
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 60px;
+  padding: 0 24px;
+  background-color: #ffffff;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.header-logo a {
+  font-size: 20px;
+  font-weight: bold;
+  color: #111827;
+  text-decoration: none;
+}
+
+.header-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.header-user-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+  color: #4b5563;
+}
+
+.user-nickname strong {
+  color: #2563eb;
+}
+
+.divider {
+  color: #d1d5db;
+}
+
+.header-link {
+  color: #4b5563;
+  text-decoration: none;
+}
+
+.header-link:hover {
+  text-decoration: underline;
+}
+
+.logout-btn {
+  background: none;
+  border: none;
+  color: #ef4444;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 0;
+}
+
+.logout-btn:hover {
+  text-decoration: underline;
+}
+
+/* ==========================================================================
+   3. 메인 레이아웃 및 캐러셀 스타일 (Main & Carousel)
+   ========================================================================== */
+.main-container {
+  width: 30%;
+  margin: 0 auto;
+  padding: 24px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 캐러셀 컨테이너 */
+.carousel-container {
+  position: relative;
+  width: 100%;
+  height: 40vh;
+  min-height: 250px; /* 💡 높이가 0px로 고사하는 것을 방지하는 최소 높이 안전장치 */
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background-color: #f3f4f6;
+}
+
+/* 슬라이드 트랙 */
+.carousel-track {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.4s ease-in-out;
+}
+
+/* 개별 슬라이드 항목 */
+.carousel-slide {
+  min-width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+/* 이미지 감싸는 래퍼 (Next.js fill 대응) */
+.main-image-wrapper {
+  position: relative; /* Next.js fill의 기준점 */
+  width: 100%;
+  height: 100%;
+}
+
+/* 이미지 요소 */
+.main-image {
+  object-fit: fill;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* ==========================================================================
+   4. 캐러셀 버튼 & 도트 인디케이터 (Carousel Controls)
+   ========================================================================== */
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.4);
+  color: white;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  transition: background 0.2s;
+}
+
+.carousel-btn:hover {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.carousel-btn.prev {
+  left: 16px;
+}
+
+.carousel-btn.next {
+  right: 16px;
+}
+
+.carousel-dots {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 10;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.2s;
+}
+
+.dot.active {
+  background: #ffffff;
+  width: 24px;
+  border-radius: 5px;
+}
+
+/* ==========================================================================
+   5. 반응형 미디어 쿼리 (Media Queries - 항상 맨 하단에 위치)
+   ========================================================================== */
+@media (max-width: 768px) {
+  .header-title {
+    display: none;
   }
-}
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  .main-container {
+    width: 90%; /* 모바일 90% */
+  }
+
+  .carousel-container {
+    height: 30vh;
+    min-height: 220px; /* 💡 모바일 웹뷰에서 vh 계산 실패 시 최소 높이 보장 */
+  }
+
+  .main-image {
+    object-fit: cover; /* 모바일에서는 찌그러짐 방지를 위해 cover 적용 */
+  }
 }
