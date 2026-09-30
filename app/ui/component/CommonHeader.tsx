@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import {useUser} from "@/app/util/session/UserSession";
-import {CommonButton} from "@/app/ui/component/CommonComponent";
+import {CommonButton} from "@/app/ui/component/commonComponent";
 
 export default function CommonHeader() {
     const router = useRouter();
@@ -17,7 +17,7 @@ export default function CommonHeader() {
     return (
         <header className="header-container">
             <div className="header-logo">
-                <Link href="https://www.naver.com/">SpaceFit AI</Link>
+                <Link href={process.env.NEXT_PUBLIC_BASE_HOME_URL ?? '/'}>SpaceFit AI</Link>
             </div>
 
             <div className="header-title">

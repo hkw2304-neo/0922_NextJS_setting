@@ -11,7 +11,8 @@ interface CommonButtonProps {
     type?: "submit" | "reset" | "button",
     title?: string,
     className?: string,
-    onClick?: () => void
+    onClick?: () => void,
+    isImage?: string
 }
 
 export function CommonLabelInput({
@@ -38,12 +39,19 @@ export function CommonLabelInput({
 }
 
 export function CommonButton({
-                                 type = "submit",
-                                 title = "-",
-    className = "button-common",
-                                 onClick
-                             }: CommonButtonProps) {
+ type = "submit",
+ title = "-",
+ className = "button-common",
+ onClick,
+ isImage = ""
+ }: CommonButtonProps)
+
+{
     return (
-        <button type={type} onClick={onClick} className={className}>{title}</button>
+        <button type={type} onClick={onClick} className={className}>
+            {isImage === "촬영" && <span aria-hidden="true">📷</span>}
+            {isImage === "앨범" && <span aria-hidden="true">🖼️</span>}
+            {title}
+        </button>
     )
 }

@@ -3,7 +3,7 @@
 import {useRouter} from "next/navigation";
 import {useState} from "react";
 import {useUser} from "@/app/util/session/UserSession";
-import {CommonLabelInput, CommonButton} from "@/app/ui/component/CommonComponent";
+import {CommonLabelInput, CommonButton} from "@/app/ui/component/commonComponent";
 
 export default function LoginScreen() {
 
